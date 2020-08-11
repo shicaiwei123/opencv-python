@@ -87,7 +87,7 @@ def retianx_test():
     SSR和MSR的测试代码
     :return:
     '''
-    path = "/home/shicaiwei/project/opencv-python/data/1060-4_rlt.png"
+    path = "/home/shicaiwei/project/opencv-python/data/img_test.png"
 
     scales = 81  # 奇数
 
@@ -97,7 +97,7 @@ def retianx_test():
     img_hsv = cv2.cvtColor(src_img, cv2.COLOR_BGR2HSV)
     H, S, V = cv2.split(img_hsv)
 
-    V_retianx = SSR(V, scales)
+    V_retianx = my_ssr(V, scales)
     img_retianx = cv2.merge([H, S, V_retianx])
     img_result = cv2.cvtColor(img_retianx, cv2.COLOR_HSV2BGR)
 
@@ -135,7 +135,6 @@ def retianx_process(img, mode='MSR'):
 
     else:
         print("error mode")
-
 
 
 if __name__ == '__main__':
