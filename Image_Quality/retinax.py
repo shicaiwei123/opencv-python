@@ -82,37 +82,10 @@ def MSR(img, scales):
     return log_uint8
 
 
-def retianx_test():
-    '''
-    SSR和MSR的测试代码
-    :return:
-    '''
-    path = "/home/shicaiwei/project/opencv-python/data/img_test.png"
-
-    scales = 81  # 奇数
-
-    src_img = cv2.imread(path)
-
-    # 处理V空间是为了防止色彩失真
-    img_hsv = cv2.cvtColor(src_img, cv2.COLOR_BGR2HSV)
-    H, S, V = cv2.split(img_hsv)
-
-    V_retianx = my_ssr(V, scales)
-    img_retianx = cv2.merge([H, S, V_retianx])
-    img_result = cv2.cvtColor(img_retianx, cv2.COLOR_HSV2BGR)
-
-    cv2.namedWindow("img", 0)
-    cv2.namedWindow("MSR_result", 0)
-    cv2.imshow('img', src_img)
-    cv2.imshow('MSR_result', img_result)
-    cv2.waitKey(0)
-
-
 def retianx_process(img, mode='MSR'):
     if mode == 'SSR':
         scales = 3  # 奇数
-
-        src_img = cv2.imread(img)
+        src_img = img
         img_hsv = cv2.cvtColor(src_img, cv2.COLOR_BGR2HSV)
         H, S, V = cv2.split(img_hsv)
         V_retianx = SSR(V, scales)
@@ -135,6 +108,28 @@ def retianx_process(img, mode='MSR'):
 
     else:
         print("error mode")
+
+
+def retianx_test():
+    '''
+    SSR和MSR的测试代码
+    :return:
+    '''
+    path = "/home/shicaiwei/data/liveness_data/light_face/train/true/3.bmp"
+
+    scales = 81  # 奇数
+
+    src_img = cv2.imread(path)
+    ssr_result = retianx_process(src_img, mode='SSR')
+    msr_result = retianx_process(src_img, mode='MSR')
+
+    cv2.namedWindow("img", 0)
+    cv2.namedWindow("SSR_result", 0)
+    cv2.namedWindow("MSR_result", 0)
+    cv2.imshow('img', src_img)
+    cv2.imshow('SSR_result', ssr_result)
+    cv2.imshow('MSR_result', msr_result)
+    cv2.waitKey(0)
 
 
 if __name__ == '__main__':

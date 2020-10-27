@@ -99,13 +99,13 @@ def img_enchace(img_path):
     img_add_usm = usm_enchace(img_add)
 
     # 直方图均衡
-    img_add_hist = gamma_adjust(img_add_usm, gamma=1.5)
+    img_add_hist = gamma_adjust(img_add_usm, gamma=3)
 
     # 直方图均衡之后相加 类似HDR
-    img_add_add_hist = add_img(img_add_usm, img_add_hist, ratio=0.3)
+    img_add_add_hist = add_img(img_add_usm, img_add_hist, ratio=0.5)
 
     # 锐化
-    img_add_add_hist_usm=usm_enchace(img_add_add_hist)
+    img_add_add_hist_usm = usm_enchace(img_add_add_hist)
 
     # retian 处理
     img_msr = retianx_process(img_add)
@@ -149,7 +149,10 @@ def img_enchace(img_path):
 
     cv2.waitKey(0)
 
+    # 保存
+    cv2.imwrite("img_add.jpg", img_add)
+
 
 if __name__ == '__main__':
-    img_path = "/home/shicaiwei/project/opencv-python/data/8"
+    img_path = "data/6"
     img_enchace(img_path)

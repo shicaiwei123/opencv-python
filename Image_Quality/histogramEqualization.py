@@ -84,7 +84,7 @@ def he_test():
     不同直方图均衡方法的测试
     :return:
     '''
-    path = "/home/shicaiwei/project/opencv-python/data/6/1722-0.jpg"
+    path = "/home/shicaiwei/project/opencv-python/data/face6/2020-07-21 20:13:34.698095.jpg"
     img = cv2.imread(path)
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     if img is not None:
