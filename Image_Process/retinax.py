@@ -115,13 +115,40 @@ def retianx_test():
     SSR和MSR的测试代码
     :return:
     '''
-    path = "/home/shicaiwei/data/liveness_data/light_face/train/true/3.bmp"
+    path = "/home/shicaiwei/data/liveness_data/cross_paper_face_normal/train/living/1/34.jpg"
 
     scales = 81  # 奇数
 
     src_img = cv2.imread(path)
+    H_src, S, V_src = cv2.split(src_img)
+
     ssr_result = retianx_process(src_img, mode='SSR')
     msr_result = retianx_process(src_img, mode='MSR')
+
+    H_ssr, S, V_ssr = cv2.split(ssr_result)
+    H_msr, S, V_msr = cv2.split(msr_result)
+
+    V_src_mean = np.mean(V_src)
+    print("V_src_mean", V_src_mean)
+
+    V_ssr_mean = np.mean(V_ssr)
+    print("V_ssr_mean", V_ssr_mean)
+
+    V_msr_mean = np.mean(V_msr)
+    print("V_msr_mean", V_msr_mean)
+
+    cv2.namedWindow("H_src", 0)
+    H_src[H_src < 100] = 0
+    H_src[H_src > 150] = 0
+    cv2.imshow("H_src", H_src)
+
+    cv2.namedWindow("H_ssr", 0)
+    H_ssr[H_ssr < 170] = 0
+    H_ssr[H_ssr > 220] = 0
+    cv2.imshow("H_ssr", H_ssr)
+
+    cv2.namedWindow("H_msr", 0)
+    cv2.imshow("H_msr", H_msr)
 
     cv2.namedWindow("img", 0)
     cv2.namedWindow("SSR_result", 0)

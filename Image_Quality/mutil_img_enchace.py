@@ -1,9 +1,9 @@
 import cv2
 from utils import get_file_list
 import numpy as np
-from retinax import retianx_process
+from Image_Process.retinax import retianx_process
 from edge_enhance import usm_enchace
-from histogramEqualization import CLAHE_multi, gamma_adjust
+from Image_Process.histogramEqualization import CLAHE_multi, gamma_adjust
 
 
 def add_img(img1, img2, ratio=0.5):
