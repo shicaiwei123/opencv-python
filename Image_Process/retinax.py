@@ -50,7 +50,7 @@ def my_ssr(src_img, size):
     log_img = cv2.log(src_img + 1.0)
 
     log_r = log_img - log_blur
-    
+
 
     ssr = (log_r - np.min(log_r)) / (np.max(log_r) - np.min(log_r))
     ssr = np.uint8(ssr * 255)
